@@ -52,6 +52,62 @@ Linux 0.11 Lab works on Linux, Windows and Mac OSX, but please install docker at
     $ cd cloud-lab/
     $ tools/docker/run linux-0.11-lab
 
+## Install docker
+
+Docker is required by Linux 0.11 Lab, please install it at first:
+
+- Linux, Mac OSX, Windows 10: [Docker CE](https://store.docker.com/search?type=edition&offering=community)
+
+- older Windows: [Docker Toolbox](https://www.docker.com/docker-toolbox) or Virtualbox/Vmware + Linux.
+
+Notes:
+
+In order to run docker without password, please make sure your user is added in the docker group:
+
+    $ sudo usermod -aG docker $USER
+
+In order to speedup docker images downloading, please configure a local docker mirror in `/etc/default/docker`, for example:
+
+    $ grep registry-mirror /etc/default/docker
+    DOCKER_OPTS="$DOCKER_OPTS --registry-mirror=https://docker.mirrors.ustc.edu.cn"
+    $ service docker restart
+
+In order to avoid network ip address conflict, please try following changes and restart docker:
+
+    $ grep bip /etc/default/docker
+    DOCKER_OPTS="$DOCKER_OPTS --bip=10.66.0.10/16"
+    $ service docker restart
+
+If the above changes not work, try something as following:
+
+    $ grep dockerd /lib/systemd/system/docker.service
+    ExecStart=/usr/bin/dockerd -H fd:// --bip=10.66.0.10/16 --registry-mirror=https://docker.mirrors.ustc.edu.cn
+    $ service docker restart
+
+If still have errors like 'Client.Timeout exceeded while waiting headers', please try the other docker mirror sites:
+
+* Aliyun (Register Required): <http://t.cn/AiFxJ8QE>
+* Docker China: https://registry.docker-cn.com
+
+Configuration in Ubuntu:
+
+    $ echo "DOCKER_OPTS=\"\$DOCKER_OPTS --registry-mirror=<your accelerate address>\"" | sudo tee -a /etc/default/docker
+    $ sudo service docker restart
+
+For Ubuntu 12.04, please install the new kernel at first, otherwise, docker will not work:
+
+    $ sudo apt-get install linux-generic-lts-trusty
+
+If installed via Docker Toolbox, please enter into the `/mnt/sda1` directory of the `default` system on Virtualbox, otherwise, after poweroff, the data will be lost for the default `/root` directory is only mounted in DRAM.
+
+    $ cd /mnt/sda1
+
+For Linux or Mac OSX, please simply choose one directory in `~/Downloads` or `~/Documents`.
+
+    $ cd ~/Documents
+
+## Older method
+
 Here is the deprecated method in Linux system:
 
 * The Linux distributions: debian and ubuntu (>= 14.04) are recommended
@@ -63,7 +119,6 @@ Here is the deprecated method in Linux system:
 
         $ sudo apt-get install bochs vgabios bochsbios bochs-doc bochs-x libltdl7 bochs-sdl bochs-term
         $ sudo apt-get install graphviz cflow
-
 
 ## Hack Linux 0.11
 

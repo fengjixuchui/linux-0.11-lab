@@ -108,6 +108,8 @@ For Linux or Mac OSX, please simply choose one directory in `~/Downloads` or `~/
 
 ## Older method
 
+This is a **BAD** method, but if really want a try, **please comment 'DOCKER ?= yes' in Makefile at first**:
+
 Here is the deprecated method in Linux system:
 
 * The Linux distributions: debian and ubuntu (>= 14.04) are recommended

@@ -178,11 +178,11 @@ start-fd: Image flp
 	$(VM_CMD_FDB)$(VM_DISPLAY)
 
 ifeq ($(OS), Linux)
-  MINIX_FS = $(shell lsmod | grep minix 2>/dev/null; echo $$?)
+  MINIX_FS = $(shell lsmod | grep -q minix >/dev/null 2>&1; echo $$?)
   ifeq ($(MINIX_FS), 0)
     HDA_INSTALL = hda-install
   else
-    MINIX_FS = $(shell sudo modprobe minix 2>/dev/null; echo $$?)
+    MINIX_FS = $(shell sudo modprobe minix >/dev/null 2>&1; echo $$?)
     ifeq ($(MINIX_FS), 0)
       HDA_INSTALL = hda-install
     endif

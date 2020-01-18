@@ -15,11 +15,11 @@
 
         $ make start-hd
 
-    The above command will compile kernel, install examples/ to hardisk image and boot them.
+    The above command will compile kernel, install examples/ to hardisk image (depends on minix fs kernel module) and boot them.
 
 ## Emulator Side
 
-6. Compile, link and run
+1. Compile, link and run
 
         $ cd examples/syscall/
         $ make

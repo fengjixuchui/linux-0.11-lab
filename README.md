@@ -52,6 +52,10 @@ Linux 0.11 Lab works on Linux, Windows and Mac OSX, but please install docker at
     $ cd cloud-lab/
     $ tools/docker/run linux-0.11-lab
 
+**Notes**: Some examples depends on minix fs kernel module, but the Linux kernel used by the docker of
+           windows, macosx and even some Linux distributions may not provide such kernel module, please compile
+           one yourself. Ubuntu is recommended.
+
 ## Install docker
 
 Docker is required by Linux 0.11 Lab, please install it at first:
@@ -60,7 +64,7 @@ Docker is required by Linux 0.11 Lab, please install it at first:
 
 - older Windows: [Docker Toolbox](https://www.docker.com/docker-toolbox) or Virtualbox/Vmware + Linux.
 
-Notes:
+**Notes**:
 
 In order to run docker without password, please make sure your user is added in the docker group:
 
@@ -124,7 +128,7 @@ Here is the deprecated method in Linux system:
 
 ## Hack Linux 0.11
 
-**Note** To enable kvm speedup for hardisk boot, please make sure cpu virtualization is enabled in bios features.
+**Notes** To enable kvm speedup for hardisk boot, please make sure cpu virtualization is enabled in bios features.
 
     $ make help		// get help
     $ make  		// compile
@@ -217,6 +221,10 @@ A new demonstration is added: [Linux 0.11 Lab: Add a new syscall into Linux 0.11
     ld -o syscall syscall.o
     ./syscall
     Hello, Linux 0.11
+
+**Notes** If not `examples/` found in default directory: `/usr/root` of Linux
+          0.11, that means your host may not have minix fs kernel module, compile
+          one yourself, or switch your host to Ubuntu.
 
 ### Linux 0.00
 

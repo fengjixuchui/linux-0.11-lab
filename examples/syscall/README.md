@@ -5,7 +5,7 @@
 
 1. Enter into the lab root directory
 
-        $ cd /path/to/linux-0.11-lab/
+        $ cd /path/to/linux-0.11-lab/src/
 
 2. Apply the syscall changes
 
@@ -13,6 +13,7 @@
 
 3. Compile and boot the new kernel and filesystem
 
+        $ cd ../
         $ make start-hd
 
     The above command will compile kernel, install examples/ to hardisk image (depends on minix fs kernel module) and boot them.

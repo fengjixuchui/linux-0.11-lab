@@ -3,7 +3,12 @@ include ../Makefile.head
 LDFLAGS	+= -Ttext 0 -e _start
 
 # TODO: need to document why the size need plus 3*512
-KERNEL_SIZE = $(shell stat -c%s ../kernel.bin | tr -d '\n')
+ifeq ($(OS), Darwin)
+    KERNEL_SIZE = $(shell stat -f%z ../kernel.bin | tr -d '\n')
+else
+    KERNEL_SIZE = $(shell stat -c%s ../kernel.bin | tr -d '\n')
+endif
+
    SYS_SIZE = $(shell echo '($(KERNEL_SIZE) + 15 + 3*512)/16' | bc)
 
 all: bootsect setup

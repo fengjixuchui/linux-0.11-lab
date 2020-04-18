@@ -4,11 +4,11 @@ LDFLAGS += -r
 CFLAGS	+= -I../include
 CPP	+= -I../include
 
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
 
 OBJS=	open.o read_write.o inode.o file_table.o buffer.o super.o \

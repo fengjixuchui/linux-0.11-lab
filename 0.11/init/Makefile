@@ -8,7 +8,7 @@ ifneq ($(RAMDISK_SIZE),)
   CFLAGS += -DRAMDISK_SIZE=$(RAMDISK_SIZE)
 endif
 
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
 
 clean:

@@ -11,11 +11,11 @@ include ../Makefile.head
 CFLAGS	+= -I../include
 CPP	+= -I../include
 
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
 
 OBJS  = ctype.o _exit.o open.o close.o errno.o write.o dup.o setsid.o \

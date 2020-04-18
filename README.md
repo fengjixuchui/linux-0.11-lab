@@ -56,11 +56,12 @@ Linux 0.11 Lab works on Linux, Windows and Mac OSX, but please install docker at
            windows, macosx and even some Linux distributions may not provide such kernel module, please compile
            one yourself. Ubuntu is recommended.
 
-## Install docker
+### Install docker
 
 Docker is required by Linux 0.11 Lab, please install it at first:
 
 - Linux, Mac OSX, Windows 10: [Docker CE](https://store.docker.com/search?type=edition&offering=community)
+    - For Windows user, please use 'Git Bash Here' in right mouse press menu, Windows PowerShell is **NOT** supported.
 
 - older Windows: [Docker Toolbox](https://www.docker.com/docker-toolbox) or Virtualbox/Vmware + Linux.
 
@@ -110,7 +111,9 @@ For Linux or Mac OSX, please simply choose one directory in `~/Downloads` or `~/
 
     $ cd ~/Documents
 
-## Older method
+### Older methods
+
+#### For Linux System
 
 This is a **BAD** method, but if really want a try, **please comment 'DOCKER ?= yes' in Makefile at first**:
 
@@ -125,6 +128,46 @@ Here is the deprecated method in Linux system:
 
         $ sudo apt-get install bochs vgabios bochsbios bochs-doc bochs-x libltdl7 bochs-sdl bochs-term
         $ sudo apt-get install graphviz cflow
+
+#### For Mac OSX System
+
+* Install xcode from "App Store"
+* Install Mac package manage tool: MacPorts from http://www.macports.org/install.php
+
+    * Check your OS X version from "About This Mac", for example, Lion
+    * Go to the "Mac OS X Package (.pkg) Installer" part and download the corresponding version
+    * Self update MacPorts
+
+                $ xcode-select --switch /Applications/Xcode.app/Contents/Developer
+                $ sudo port -v selfupdate
+
+* Install cross compiler gcc and binutils
+
+        $ sudo port install i386-elf-binutils i386-elf-gcc
+
+* Install qemu
+
+        $ sudo port install qemu
+
+* Install graphviz and cflow
+
+        $ sudo port install GraphViz
+        $ sudo port install cflow
+
+* Install gdb. 'Cause port doesn't provide i386-elf-gdb, use the pre-compiled tools/mac/gdb.xz or download its source and compile it.
+
+        $ cd tools/mac/ ; tar Jxf gdb.xz
+
+Optional
+
+    $ sudo port install cscope
+    $ sudo port install ctags
+
+    $ wget ftp://ftp.gnu.org/gnu/gdb/gdb-7.4.tar.bz2
+    $ tar -xzvf gdb-7.4.tar.bz2
+    $ cd gdb-7.4
+    $ ./configure --target=i386-elf
+    $ make
 
 ## Hack Linux 0.11
 
@@ -267,7 +310,7 @@ A new demonstration is added: [Linux 0.11 Lab: Add a new syscall into Linux 0.11
     * add callgraph generation support
     * add docker support, allow to build the whole lab with one command
     * rewrite the document: README.md
-    * Fix up "Reset-floppy Called"
+    * Fix up "Reset-floppy Called", should use old qemu 0.10, tools/qemu/
     * clean up everything
     * repo: <https://gitee.com/tinylab/linux-0.11-lab>
 

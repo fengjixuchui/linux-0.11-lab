@@ -18,11 +18,11 @@ DRIVERS =kernel/blk_drv/blk_drv.a kernel/chr_drv/chr_drv.a
 MATH	=kernel/math/math.a
 LIBS	=lib/lib.a
 
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
 
 all:	Image

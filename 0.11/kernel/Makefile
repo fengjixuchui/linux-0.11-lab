@@ -22,11 +22,11 @@ CFLAGS	+= -I../include
 
 CPP	+= -I../include
 
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
 
 OBJS  = sched.o system_call.o traps.o asm.o fork.o \

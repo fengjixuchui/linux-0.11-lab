@@ -5,11 +5,11 @@ LDFLAGS += -r
 CFLAGS	+= -I../include
 CPP	+= -I../include
 
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
 
 OBJS	= memory.o page.o

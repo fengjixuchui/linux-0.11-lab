@@ -15,11 +15,11 @@ ifneq ($(RAMDISK_START),)
   CFLAGS += -DRAMDISK_START=$(RAMDISK_START)
 endif
 
-.c.s:
+%.s: %.c
 	$(Q)$(CC) $(CFLAGS) -S -o $*.s $<
-.s.o:
+%.o: %.s
 	$(Q)$(AS) $(AFLAGS) -o $*.o $<
-.c.o:
+%.o: %.c
 	$(Q)$(CC) $(CFLAGS) -c -o $*.o $<
 
 OBJS  = ll_rw_blk.o floppy.o hd.o ramdisk.o

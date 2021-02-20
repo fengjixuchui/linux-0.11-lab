@@ -23,7 +23,7 @@ ROOTFS_DIR := rootfs
 CALLGRAPH_DIR := callgraph
 
 # Xterminal: lxterminal, terminator ...
-ifeq ($(shell env | grep -q ^XDG; echo $$?), 0)
+ifeq ($(shell env | egrep -q "^XDG|^LXQT"; echo $$?), 0)
   XTERM ?= $(shell echo `tools/xterm.sh lxterminal`)
 else
   XTERM := null
@@ -94,6 +94,7 @@ endif
 ifeq ($(OS), Linux)
   ifeq ($(QEMU_PREBUILT), 1)
     QEMU_PATH = $(QEMU_PREBUILT_PATH)
+    QEMU_LPATH ?= LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(CURDIR)/$(QEMU_PREBUILT_PATH)/libs
     QEMU_XOPTS += -no-kqemu -L $(QEMU_PATH)
   endif
   ifeq ($(BOCHS_PREBUILT), 1)
